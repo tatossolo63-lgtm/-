@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة تسجيل دخول تجريبية</title>
+    <style>
+        /* تصميم عام للصفحة */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* الحاوية الرئيسية للنموذج */
+        .login-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        /* عنوان النموذج */
+        .login-container h2 {
+            text-align: center;
+            color: #1c1e21;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        /* تصميم حقول الإدخال */
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #606770;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #1877f2;
+            box-shadow: 0 0 0 2px #e7f3ff;
+        }
+
+        /* تصميم زر تسجيل الدخول */
+        .login-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #1877f2;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .login-button:hover {
+            background-color: #166fe5;
+        }
+
+        /* المنطقة التي ستظهر فيها البيانات */
+        #result-area {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #e7f3ff;
+            border: 1px solid #b8daff;
+            border-radius: 6px;
+            display: none; /* مخفي في البداية */
+        }
+
+        #result-area h3 {
+            margin-top: 0;
+            color: #004085;
+        }
+
+        #result-area p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>تسجيل الدخول</h2>
+        
+        <!-- نموذج الإدخال -->
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="email">البريد الإلكتروني أو رقم الهاتف</label>
+                <input type="text" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">كلمة المرور</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="login-button">تسجيل الدخول</button>
+        </form>
+
+        <!-- هنا ستظهر البيانات بعد الإرسال -->
+        <div id="result-area">
+            <h3>تم استلام البيانات التي أدخلتها:</h3>
+            <p><strong>البريد الإلكتروني:</strong> <span id="display-email"></span></p>
+            <p><strong>كلمة المرور:</strong> <span id="display-password"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // انتظر حتى يتم تحميل الصفحة بالكامل
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // الحصول على عناصر الصفحة
+            const loginForm = document.getElementById('loginForm');
+            const resultArea = document.getElementById('result-area');
+            const displayEmail = document.getElementById('display-email');
+            const displayPassword = document.getElementById('display-password');
+
+            // إضافة "مستمع للحدث" عند إرسال النموذج
+            loginForm.addEventListener('submit', function(event) {
+                
+                // منع الإجراء الافتراضي للنموذج (وهو إعادة تحميل الصفحة)
+                event.preventDefault();
+
+                // الحصول على القيم من حقول الإدخال
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                // وضع القيم في منطقة العرض
+                displayEmail.textContent = email;
+                displayPassword.textContent = password;
+
+                // إظهار منطقة العرض التي كانت مخفية
+                resultArea.style.display = 'block';
+            });
+        });
+    </script>
+
+</body>
+</html>
